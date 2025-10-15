@@ -39,10 +39,10 @@
             min-height: 100vh;
             overflow-x: hidden;
             color: var(--white);
-            user-select: none; /* 🔒 Anti-sélection */
+            user-select: none;
         }
 
-        /* ✨ LOGO ANIMÉ - CRÉATIF/FLUIDE */
+        /* ✨ LOGO ANIMÉ */
         .logo-container {
             position: fixed;
             top: 20px;
@@ -72,10 +72,7 @@
         }
 
         @keyframes logoLoad {
-            to {
-                opacity: 1;
-                transform: scale(1) rotate(0deg);
-            }
+            to { opacity: 1; transform: scale(1) rotate(0deg); }
         }
 
         @keyframes logoFloat {
@@ -118,12 +115,12 @@
         .wkw-line2 { font-size: clamp(2.5rem, 8vw, 4rem); }
         .wkw-line3 { font-size: clamp(2rem, 6vw, 3rem); }
 
-        /* 🎨 BOUTONS ULTRA-CRÉATIFS */
+        /* 🎨 3 BOUTONS ULTRA-CRÉATIFS */
         .button-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 40px;
-            max-width: 800px;
+            max-width: 1000px;
             width: 100%;
             perspective: 1000px;
         }
@@ -162,6 +159,7 @@
             font-size: 1.5rem;
             z-index: 2;
             transition: all 0.4s ease;
+            animation: iconPulse 2s ease-in-out infinite;
         }
 
         .btn-text {
@@ -211,6 +209,11 @@
             50% { transform: translateY(-5px) rotateX(2deg); }
         }
 
+        @keyframes iconPulse {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-50%) scale(1.2); }
+        }
+
         @keyframes shine {
             0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
             100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
@@ -222,15 +225,13 @@
 
         .btn:nth-child(1) { animation-delay: 2s; }
         .btn:nth-child(2) { animation-delay: 2.3s; }
+        .btn:nth-child(3) { animation-delay: 2.6s; }
 
         @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0) rotateX(0deg);
-            }
+            to { opacity: 1; transform: translateY(0) rotateX(0deg); }
         }
 
-        /* 🌟 FOOTER MODERNE - GLASS + ANIM */
+        /* 🌟 FOOTER MODERNE */
         .footer {
             position: fixed;
             bottom: 0;
@@ -285,15 +286,7 @@
         }
 
         @keyframes footerSlide {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes iconPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* RESPONSIVE */
@@ -301,7 +294,11 @@
             .logo-container { top: 15px; left: 15px; padding: 10px; }
             .logo { width: 40px; height: 40px; }
             .container { padding: 80px 15px 120px; }
-            .button-grid { grid-template-columns: 1fr; gap: 30px; }
+            .button-grid { 
+                grid-template-columns: 1fr; 
+                gap: 30px;
+                max-width: 400px;
+            }
             .btn { padding: 22px 35px; font-size: 1.2rem; }
             .footer-content { flex-direction: column; gap: 10px; text-align: center; }
         }
@@ -371,6 +368,10 @@
             <a href="https://utiqano.github.io/Planning-Salle-de-R-union/" class="btn" data-icon="📅">
                 <span class="btn-text">PLANNING RÉUNION</span>
             </a>
+            <!-- ✅ NOUVEAU BOUTON FORMATION 5S + GEMBA OJT -->
+            <a href="https://utiqano.github.io/Formation/" class="btn" data-icon="📚">
+                <span class="btn-text">FORMATION 5S & GEMBA OJT</span>
+            </a>
         </div>
     </div>
 
@@ -379,7 +380,7 @@
         <div class="footer-content">
             <div class="footer-left">
                 <div class="footer-icon">⚙️</div>
-                <div class="footer-title">DÉPARTEMENT AMÉLIORATION CONTENU</div>
+                <div class="footer-title">DÉPARTEMENT AMÉLIORATION CONTINU</div>
             </div>
             <div class="footer-right">WKW AUTOMOTIVE TUNISIE</div>
         </div>
