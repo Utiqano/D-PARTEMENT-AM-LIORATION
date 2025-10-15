@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <!-- 🔒 SÉCURITÉ MAX -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' https://media.licdn.com data:; object-src 'none'; base-uri 'self';">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    <title>PORTAIL SÉCURISÉ - WKW AUTOMOTIVE TUNISIE</title>
+    
+    <style>
+        :root {
+            --gray-dark: #2d3748;
+            --gray-light: #4a5568;
+            --red-main: #dc2626;
+            --white: #ffffff;
+            --shadow-pro: 0 4px 20px rgba(0,0,0,0.3);
+            --shadow-3d: 0 10px 30px rgba(220,38,38,0.4);
+            --glow-red: 0 0 20px rgba(220,38,38,0.8);
+            --glass-bg: rgba(255,255,255,0.1);
+            --glass-blur: blur(10px);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: var(--gray-dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: var(--white);
+            user-select: none; /* 🔒 Anti-sélection */
+        }
+
+        /* ✨ LOGO ANIMÉ - CRÉATIF/FLUIDE */
+        .logo-container {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            padding: 12px;
+            border-radius: 12px;
+            border: 2px solid var(--red-main);
+            animation: logoLoad 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+            opacity: 0;
+            transform: scale(0) rotate(-180deg);
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        .logo:hover {
+            transform: scale(1.2) rotate(360deg);
+            filter: drop-shadow(0 0 15px var(--red-main));
+        }
+
+        @keyframes logoLoad {
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Container principal */
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 100px 20px 140px;
+        }
+
+        /* ANIMATION TEXTE 1 FOIS */
+        .main-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .wkw-line {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: bold;
+            margin: 10px 0;
+            border-right: 4px solid var(--red-main);
+            white-space: nowrap;
+            overflow: hidden;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .wkw-line1 { color: var(--red-main); }
+        .wkw-line2 { color: var(--white); }
+        .wkw-line3 { color: var(--gray-light); }
+
+        .wkw-line1 { font-size: clamp(3rem, 10vw, 6rem); }
+        .wkw-line2 { font-size: clamp(2.5rem, 8vw, 4rem); }
+        .wkw-line3 { font-size: clamp(2rem, 6vw, 3rem); }
+
+        /* 🎨 BOUTONS ULTRA-CRÉATIFS */
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            max-width: 800px;
+            width: 100%;
+            perspective: 1000px;
+        }
+
+        .btn {
+            position: relative;
+            padding: 25px 40px;
+            border: none;
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            color: var(--white);
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 15px;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: var(--shadow-pro);
+            overflow: hidden;
+            animation: btnFloat 3s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+            opacity: 0;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+
+        .btn::before {
+            content: attr(data-icon);
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            z-index: 2;
+            transition: all 0.4s ease;
+        }
+
+        .btn-text {
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+            margin-left: 50px;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                rgba(220,38,38,0.1) 0%, 
+                rgba(220,38,38,0.3) 50%, 
+                transparent 100%);
+            border-radius: 15px;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .btn:hover {
+            transform: translateY(-10px) rotateX(10deg) rotateY(5deg) scale(1.02);
+            box-shadow: var(--glow-red), var(--shadow-3d);
+            border-color: var(--red-main);
+        }
+
+        .btn:hover::after {
+            opacity: 1;
+            animation: shine 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .btn:hover .btn-text {
+            text-shadow: 0 0 10px var(--white);
+        }
+
+        .btn:active {
+            transform: translateY(-5px) scale(0.98);
+        }
+
+        @keyframes btnFloat {
+            0%, 100% { transform: translateY(0px) rotateX(0deg); }
+            50% { transform: translateY(-5px) rotateX(2deg); }
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .btn {
+            animation: fadeInUp 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+
+        .btn:nth-child(1) { animation-delay: 2s; }
+        .btn:nth-child(2) { animation-delay: 2.3s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(0deg);
+            }
+        }
+
+        /* 🌟 FOOTER MODERNE - GLASS + ANIM */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            border-top: 1px solid rgba(220,38,38,0.3);
+            padding: 20px 0;
+            z-index: 999;
+            animation: footerSlide 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) 2.5s forwards;
+            opacity: 0;
+            transform: translateY(100%);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--red-main);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            animation: iconPulse 2s ease-in-out infinite;
+        }
+
+        .footer-title {
+            color: var(--red-main);
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        .footer-right {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        @keyframes footerSlide {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .logo-container { top: 15px; left: 15px; padding: 10px; }
+            .logo { width: 40px; height: 40px; }
+            .container { padding: 80px 15px 120px; }
+            .button-grid { grid-template-columns: 1fr; gap: 30px; }
+            .btn { padding: 22px 35px; font-size: 1.2rem; }
+            .footer-content { flex-direction: column; gap: 10px; text-align: center; }
+        }
+
+        @media (max-width: 480px) {
+            .logo { width: 35px; height: 35px; }
+            .container { padding: 70px 10px 110px; }
+            .btn { padding: 20px 30px; font-size: 1.1rem; }
+        }
+
+        /* Loading */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gray-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease;
+        }
+
+        .loading.hidden { opacity: 0; pointer-events: none; }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--gray-light);
+            border-top: 3px solid var(--red-main);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- ✨ LOGO ANIMÉ -->
+    <div class="logo-container">
+        <img src="https://media.licdn.com/dms/image/v2/C510BAQFv4NwvhYRq8Q/company-logo_200_200/company-logo_200_200/0/1631351838133?e=2147483647&v=beta&t=pE5-TQRX2fd9oIfzQypoBLterLoj-X4wOnC3C8MMI4Q" 
+             alt="WKW Automotive" class="logo"
+             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBmaWxsPSIjZGMyNjI2Ii8+Cjx0ZXh0IHg9IjIwIiB5PSIyNSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+V0tXPC90ZXh0Pgo8L3N2Zz4K'">
+    </div>
+
+    <div class="container">
+        <div class="main-title">
+            <h1 class="wkw-line wkw-line1" id="wkw"></h1>
+            <h1 class="wkw-line wkw-line2" id="automotive"></h1>
+            <h1 class="wkw-line wkw-line3" id="tunisie"></h1>
+        </div>
+
+        <div class="button-grid">
+            <a href="https://utiqano.github.io/VISITEUR-EXTERNE/" class="btn" data-icon="🔐">
+                <span class="btn-text">VISITEUR EXTERNE</span>
+            </a>
+            <a href="https://utiqano.github.io/Planning-Salle-de-R-union/" class="btn" data-icon="📅">
+                <span class="btn-text">PLANNING RÉUNION</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- 🌟 FOOTER MODERNE -->
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <div class="footer-icon">⚙️</div>
+                <div class="footer-title">DÉPARTEMENT AMÉLIORATION CONTENU</div>
+            </div>
+            <div class="footer-right">WKW AUTOMOTIVE TUNISIE</div>
+        </div>
+    </div>
+
+    <script>
+        // ANIMATION TEXTE 1 FOIS
+        const texts = [
+            { element: 'wkw', text: 'WKW', delay: 80 },
+            { element: 'automotive', text: 'AUTOMOTIVE', delay: 60 },
+            { element: 'tunisie', text: 'TUNISIE', delay: 40 }
+        ];
+
+        let animationCompleted = false;
+
+        function typeWriter(text, elementId, speed = 80) {
+            const element = document.getElementById(elementId);
+            element.textContent = '';
+            element.style.opacity = '1';
+            
+            let i = 0;
+            const timer = setInterval(() => {
+                element.textContent += text.charAt(i);
+                i++;
+                if (i > text.length) {
+                    clearInterval(timer);
+                    element.style.borderRight = 'none';
+                    if (elementId === 'tunisie') animationCompleted = true;
+                }
+            }, speed);
+        }
+
+        function startAnimation() {
+            if (animationCompleted) return;
+            typeWriter('WKW', 'wkw', 80);
+            setTimeout(() => typeWriter('AUTOMOTIVE', 'automotive', 60), 700);
+            setTimeout(() => typeWriter('TUNISIE', 'tunisie', 40), 1400);
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('hidden');
+                setTimeout(startAnimation, 200);
+            }, 500);
+        });
+
+        window.addEventListener('pageshow', (e) => {
+            if (e.persisted || performance.navigation.type === 2) {
+                animationCompleted = false;
+                document.querySelectorAll('.wkw-line').forEach(el => {
+                    el.textContent = '';
+                    el.style.opacity = '0';
+                    el.style.borderRight = '4px solid var(--red-main)';
+                });
+                setTimeout(startAnimation, 100);
+            }
+        });
+
+        // 🔒 SÉCURITÉ MAX
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('dragstart', e => e.preventDefault());
+        document.addEventListener('keydown', (e) => {
+            if (e.keyCode === 123 || e.key === 'F12' || e.key === 'F11' ||
+                (e.ctrlKey && e.key === 'u') || (e.ctrlKey && e.key === 's') ||
+                (e.ctrlKey && e.shiftKey && e.key === 'I') || e.key === 'PrintScreen') {
+                e.preventDefault();
+            }
+        });
+        window.addEventListener('beforeprint', () => document.body.style.display = 'none');
+        window.addEventListener('afterprint', () => document.body.style.display = '');
+    </script>
+</body>
+</html>
