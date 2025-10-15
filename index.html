@@ -12,6 +12,15 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
     <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    
+    <!-- ✅ PWA MANIFEST -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#dc2626">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="WKW Tunisie">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    
     <title>PORTAIL SÉCURISÉ - WKW AUTOMOTIVE TUNISIE</title>
     
     <style>
@@ -45,6 +54,7 @@
             color: var(--white);
             user-select: none;
             touch-action: manipulation;
+            margin: 0;
         }
 
         /* ✨ LOGO ANIMÉ - RESPONSIVE */
@@ -195,7 +205,6 @@
             will-change: transform;
         }
 
-        /* RÉACTIF HOVER + TOUCH */
         .btn:hover, .btn:active {
             transform: translateY(-8px) rotateX(8deg) rotateY(3deg) scale(1.02);
             box-shadow: var(--glow-red), var(--shadow-3d);
@@ -307,6 +316,43 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* PWA INSTALL PROMPT */
+        .install-prompt {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            border: 2px solid var(--red-main);
+            border-radius: 15px;
+            padding: 15px 25px;
+            display: none;
+            z-index: 1001;
+            animation: slideUp 0.3s ease;
+        }
+
+        .install-prompt.show {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .install-prompt button {
+            background: var(--red-main);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateX(-50%) translateY(20px); opacity: 0; }
+            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+
         /* RESPONSIVE - 5 PLATEFORMES */
         @media (max-width: 1024px) {
             .button-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
@@ -344,7 +390,6 @@
             .btn { font-size: 1rem; padding: 16px 20px; }
         }
 
-        /* PERFORMANCE + RÉACTIVITÉ */
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
@@ -390,6 +435,13 @@
         <div class="spinner"></div>
     </div>
 
+    <!-- PWA INSTALL PROMPT -->
+    <div class="install-prompt" id="installPrompt">
+        <span>📱 Installer WKW Tunisie ?</span>
+        <button onclick="installPWA()">Installer</button>
+        <button onclick="dismissInstall()">✕</button>
+    </div>
+
     <!-- ✨ LOGO ANIMÉ -->
     <div class="logo-container">
         <img src="https://media.licdn.com/dms/image/v2/C510BAQFv4NwvhYRq8Q/company-logo_200_200/company-logo_200_200/0/1631351838133?e=2147483647&v=beta&t=pE5-TQRX2fd9oIfzQypoBLterLoj-X4wOnC3C8MMI4Q" 
@@ -429,6 +481,38 @@
     </div>
 
     <script>
+        // PWA REGISTRATION
+        let deferredPrompt;
+        const installPrompt = document.getElementById('installPrompt');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installPrompt.classList.add('show');
+        });
+
+        function installPWA() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choice) => {
+                    if (choice.outcome === 'accepted') {
+                        console.log('PWA installed!');
+                    }
+                    deferredPrompt = null;
+                    installPrompt.classList.remove('show');
+                });
+            }
+        }
+
+        function dismissInstall() {
+            installPrompt.classList.remove('show');
+        }
+
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA was installed');
+            installPrompt.classList.remove('show');
+        });
+
         // ANIMATION TEXTE 1 FOIS - ULTRA-RÉACTIF
         const texts = [
             { element: 'wkw', text: 'WKW', delay: 80 },
